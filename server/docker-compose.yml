@@ -1,0 +1,19 @@
+tinc: #nombre de mi app
+  restart: always
+  container_name: tinc
+  build: .
+  ports:
+    - "655"
+    - "655/UDP"
+  net: "host"
+  devices:
+    - "/dev/net/tun"
+  cap_add:
+    - NET_ADMIN
+  volumes:
+    - "/srv/tinc:/etc/tinc/hosts"
+  environment:
+    - VIRTUAL_HOST=vpn.bys-control.com.ar
+    - LETSENCRYPT_HOST=vpn.bys-control.com.ar
+    - LETSENCRYPT_EMAIL=administrator@bys-control.com.ar
+    - HTTPS_METHOD=noredirect
